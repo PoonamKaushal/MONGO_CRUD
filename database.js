@@ -27,7 +27,14 @@ async function main() {
   // find all the docs which have saras as the first name
   const result = await collections.find({ firstname: "Saras" }).toArray();
   console.log("Result=>", result);
-
+  const updateResult = await collections.updateOne(
+    { firstname: "Saras" },
+    { $set: { firstname: "Aabha" } }
+  );
+  console.log(updateResult.matchedCount);
+  console.log(updateResult.modifiedCount);
+  const deleteDoc = await collections.deleteOne({ firstname: "Aabha" });
+  console.log(deleteDoc);
   return "done.";
 }
 
